@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 import requests
 import random
-import json
+import simplejson as json
 import hashlib
 import hmac
 import urllib
-
+from mongotools import MongoTools
 class InstagramAPI:
     API_URL = 'https://i.instagram.com/api/v1/'
     USER_AGENT = 'Instagram 8.2.0 Android (18/4.3; 320dpi; 720x1280; Xiaomi; HM 1SW; armani; qcom; en_US)'
@@ -478,10 +478,9 @@ class InstagramAPI:
             print ("Request return " + str(response.status_code) + " error!")
             return False
 
-
-InstagramAPI = InstagramAPI("login", "password")
-InstagramAPI.login() # login
-InstagramAPI.tagFeed("cat") # get media list by tag #cat
-media_id = InstagramAPI.LastJson # last response JSON
-InstagramAPI.like(media_id["ranked_items"][0]["pk"]) # like first media
-InstagramAPI.getUserFollowers(media_id["ranked_items"][0]["user"]["pk"]) # get first media owner followers
+# for i in InstagramAPI.LastJson.get('users'):
+#         print(i.get('username'))
+# InstagramAPI.tagFeed("cat") # get media list by tag #cat
+# media_id = InstagramAPI.LastJson # last response JSON
+# InstagramAPI.like(media_id["ranked_items"][0]["pk"]) # like first media
+# InstagramAPI.getUserFollowers(media_id["ranked_items"][0]["user"]["pk"]) # get first media owner followers
